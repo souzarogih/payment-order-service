@@ -1,0 +1,27 @@
+
+spring:
+  application:
+    name: payment-order-service
+
+  data:
+    mongodb:
+#      uri: mongodb://admin:admin@${MONGO_HOST:localhost}:${MONGO_PORT:27017}/product_service?authSource=admin
+      uri: mongodb://localhost:27017/payment_order_service
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: payment-request-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+topic:
+  create-payment-request: create-payment-req
+  create-payment-response: create-payment-resp
+
+server:
+  port: 8081
